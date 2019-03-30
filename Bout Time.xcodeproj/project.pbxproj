@@ -26,6 +26,8 @@
 		803F0200224797B700203717 /* webview_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 803F01F3224797B700203717 /* webview_bar.png */; };
 		803F02042247A36600203717 /* splash_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 803F02032247A36600203717 /* splash_screen.png */; };
 		80474BF3224AA17F0066FCE0 /* Events.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80474BF2224AA17F0066FCE0 /* Events.plist */; };
+		80CFA192224AACD400E44B0B /* GameStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFA191224AACD400E44B0B /* GameStateManager.swift */; };
+		80CFA194224DFB1D00E44B0B /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFA193224DFB1D00E44B0B /* SoundManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		803F01F3224797B700203717 /* webview_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = webview_bar.png; sourceTree = "<group>"; };
 		803F02032247A36600203717 /* splash_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_screen.png; sourceTree = "<group>"; };
 		80474BF2224AA17F0066FCE0 /* Events.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Events.plist; sourceTree = "<group>"; };
+		80CFA191224AACD400E44B0B /* GameStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManager.swift; sourceTree = "<group>"; };
+		80CFA193224DFB1D00E44B0B /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +86,9 @@
 		803F01D022478CD000203717 /* Bout Time */ = {
 			isa = PBXGroup;
 			children = (
+				80CFA18F224AACA500E44B0B /* Models */,
 				803F01E322478CEF00203717 /* Views */,
-				803F01D322478CD000203717 /* ViewController.swift */,
+				80CFA190224AACB400E44B0B /* Controllers */,
 				803F01E422478E4F00203717 /* Assets */,
 				803F01D122478CD000203717 /* AppDelegate.swift */,
 				803F01DD22478CD100203717 /* Info.plist */,
@@ -128,6 +133,23 @@
 				803F01F3224797B700203717 /* webview_bar.png */,
 			);
 			path = "Control UI Images";
+			sourceTree = "<group>";
+		};
+		80CFA18F224AACA500E44B0B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				80CFA191224AACD400E44B0B /* GameStateManager.swift */,
+				80CFA193224DFB1D00E44B0B /* SoundManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		80CFA190224AACB400E44B0B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				803F01D322478CD000203717 /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +239,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				803F01D422478CD000203717 /* ViewController.swift in Sources */,
+				80CFA194224DFB1D00E44B0B /* SoundManager.swift in Sources */,
+				80CFA192224AACD400E44B0B /* GameStateManager.swift in Sources */,
 				803F01D222478CD000203717 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
