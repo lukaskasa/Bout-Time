@@ -24,7 +24,8 @@ protocol Game {
     var roundEvents: [HistoricalEvent] { get set }
     var events: [HistoricalEvent] { get set }
     
-    init(roundsToBePlayed: Int, events: [HistoricalEvent], timePerQuestion: Int)
+    init(roundsToBePlayed: Int, timePerQuestion: Int)
+    func getEventsFromPropertyList() -> [HistoricalEvent]
     func getEventsForRound() throws -> [HistoricalEvent] // 4 Events
     func playerPutEventsInCorrectOrder(_ events: [HistoricalEvent]) -> Bool
     func setPlayerEventOrder(_ firstIndex: Int, _ secondIndex: Int) -> Void
@@ -102,7 +103,7 @@ class GameManager: Game {
     var numberOfRoundsPlayed: Int = 0
     var roundsToBePlayed: Int
     var timePerQuestion: Int
-    var events: [HistoricalEvent]
+    var events = [HistoricalEvent]()
     var roundEvents = [HistoricalEvent]()
     
     /**
@@ -115,13 +116,26 @@ class GameManager: Game {
      
      - Returns: Void
      */
-    required init(roundsToBePlayed: Int, events: [HistoricalEvent], timePerQuestion: Int) {
+    required init(roundsToBePlayed: Int, timePerQuestion: Int) {
         self.roundsToBePlayed = roundsToBePlayed
-        self.events = events
         self.timePerQuestion = timePerQuestion
+        self.events = getEventsFromPropertyList()
         self.roundEvents = getEventsForRound()
     }
     
+    /**
+     Gets all the events in the property list
+     
+     - Returns: [HistoricalEvent]
+     */
+    internal func getEventsFromPropertyList() -> [HistoricalEvent] {
+        do {
+            let propertyList = try PlistConverter.array(fromFile: "Events", ofType: "plist")
+            return EventsUnarchiver.getData(fromData: propertyList)
+        } catch let error {
+            fatalError("Property list converted/found: \(error)")
+        }
+    }
     
     /**
      Gets 4 Random Historical events
@@ -163,14 +177,12 @@ class GameManager: Game {
         
         if orderIsCorrect {
             score += 1
-
         }
         
         numberOfRoundsPlayed += 1
         
         return orderIsCorrect
     }
-    
     
     /**
      Rearanges array

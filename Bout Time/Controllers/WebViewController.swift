@@ -11,8 +11,10 @@ import WebKit
 
 class WebViewController: UIViewController {
     
+    // MARK: - Properties
     var eventLink: URL?
     
+    // MARK: - Outlets
     @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
@@ -22,14 +24,18 @@ class WebViewController: UIViewController {
             let request = URLRequest(url: url)
             webView.load(request)
         }
-
     }
     
     // To hide the status bar
     override var prefersStatusBarHidden: Bool {
         return true
     }
-
+    
+    /**
+     To dismiss the view and show the game view again
+     
+     - Returns: Void
+     */
     @IBAction func dismissWebview() {
         dismiss(animated: true, completion: nil)
     }

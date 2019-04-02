@@ -4,6 +4,46 @@
 <array>
 	<dict>
 		<key>Event</key>
+		<string>Manchester United Football Club (Newton Heath LYR F.C.) is founded</string>
+		<key>Date</key>
+		<date>1878-01-01T11:06:32Z</date>
+		<key>Link</key>
+		<string>https://en.wikipedia.org/wiki/Manchester_United_F.C.#Early_years_(1878%E2%80%931945)</string>
+	</dict>
+	<dict>
+		<key>Event</key>
+		<string>Floyd Mayweather Jr. wins his first professional fight</string>
+		<key>Date</key>
+		<string>11. Oct 1996 at 12:00:00</string>
+		<key>New item</key>
+		<string>https://en.wikipedia.org/wiki/Floyd_Mayweather_Jr.#Titles_in_boxing</string>
+	</dict>
+	<dict>
+		<key>Event</key>
+		<string>Muhammad Ali is born</string>
+		<key>Date</key>
+		<date>1942-01-17T10:00:00Z</date>
+		<key>Link</key>
+		<string>https://en.wikipedia.org/wiki/Muhammad_Ali</string>
+	</dict>
+	<dict>
+		<key>Event</key>
+		<string>Jahangir Khan wins his first World Open</string>
+		<key>Date</key>
+		<date>1981-11-28T11:00:00Z</date>
+		<key>Link</key>
+		<string>https://en.wikipedia.org/wiki/1981_Men%27s_World_Open_Squash_Championship</string>
+	</dict>
+	<dict>
+		<key>Event</key>
+		<string>Sir Donald George Bradman celebrates his test debut</string>
+		<key>Date</key>
+		<date>1928-11-30T11:00:00Z</date>
+		<key>Link</key>
+		<string>https://en.wikipedia.org/wiki/Don_Bradman</string>
+	</dict>
+	<dict>
+		<key>Event</key>
 		<string>Roy Makaay scores the fastest goal in UEFA Champions League history</string>
 		<key>Date</key>
 		<date>2007-03-07T11:00:00Z</date>

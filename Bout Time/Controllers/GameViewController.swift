@@ -67,22 +67,12 @@ class GameViewController: UIViewController {
     /**
      Initializes a new Game by populated the model with data from a property list
      
-     - Throws: error if property list is not found or invalid
-     
      - Parameters:
      - aDecoder: An abstract class that serves as the basis for objects that enable archiving and distribution of other objects.
      
-     - Returns: GameManger
      */
     required init?(coder aDecoder: NSCoder) {
-        do {
-            let pList = try PlistConverter.array(fromFile: "Events", ofType: "plist")
-            let eventData = EventsUnarchiver.getData(fromData: pList)
-            self.gameManager = GameManager(roundsToBePlayed: roundsToBePlayed, events: eventData, timePerQuestion: timePerQuestion)
-        } catch let error {
-            fatalError("Data could not be loaded: \(error)")
-        }
-        
+        self.gameManager = GameManager(roundsToBePlayed: roundsToBePlayed, timePerQuestion: timePerQuestion)
         super.init(coder: aDecoder)
     }
     
@@ -129,10 +119,8 @@ class GameViewController: UIViewController {
      - Returns: Void
      */
     func populateLabels() {
-        var i = 0
-        for label in eventLabels {
-            label.text = gameManager.roundEvents[i].eventDescription
-            i += 1
+        for (index,label) in eventLabels.enumerated() {
+            label.text = gameManager.roundEvents[index].eventDescription
         }
     }
     

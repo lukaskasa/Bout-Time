@@ -10,8 +10,10 @@ import UIKit
 
 class ScoreViewController: UIViewController {
     
+    // MARK: - Properties
     var score: String = ""
     
+    // MARK: - Outlets
     @IBOutlet weak var scoreLabel: UILabel?
     
     override func viewDidLoad() {
@@ -20,9 +22,13 @@ class ScoreViewController: UIViewController {
         scoreLabel?.text = score
     }
 
+    /**
+     To start a new game
+     
+     - Returns: Void
+     */
     @IBAction func playAgain(_ sender: Any) {
          performSegue(withIdentifier: "playAgain", sender: nil)
     }
     
-
 }
