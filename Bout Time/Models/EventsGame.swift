@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - Protocols, enums and structs
+
 protocol HistoricalEvent {
     var eventDescription: String { get }
     var eventDate: Date { get }
@@ -27,7 +29,6 @@ protocol Game {
     func playerPutEventsInCorrectOrder(_ events: [HistoricalEvent]) -> Bool
     func setPlayerEventOrder(_ firstIndex: Int, _ secondIndex: Int) -> Void
     func nextRound() -> Void
-    func playAgain() -> Void
 }
 
 struct Event: HistoricalEvent {
@@ -36,21 +37,31 @@ struct Event: HistoricalEvent {
     var eventLink: String
 }
 
-enum InventoryError: Error {
+enum ConversionError: Error {
     case invalidResource
     case conversionFailure
-    case invalidSelection
 }
 
+
 class PlistConverter {
+    
+    /**
+     Converts a property list into an array of dictionaries
+     
+     - Parameters:
+     - name: Filename
+     - type: Type of data
+     
+     - Returns: [[String:Any]]
+     */
     static func array(fromFile name: String, ofType type: String) throws -> [[String:Any]] {
         
         guard let path = Bundle.main.path(forResource: name, ofType: type) else {
-            throw InventoryError.invalidResource
+            throw ConversionError.invalidResource
         }
         
         guard let array = NSArray(contentsOfFile: path) as? [[String:Any]] else {
-            throw InventoryError.conversionFailure
+            throw ConversionError.conversionFailure
         }
         
         return array
@@ -58,6 +69,15 @@ class PlistConverter {
 }
 
 class EventsUnarchiver {
+    
+    /**
+     Converts array of dictionaries into an array of HistoricalEvent dictionaries
+     
+     - Parameters:
+     - data: Array of dictionaries
+     
+     - Returns: [HistoricalEvent]
+     */
     static func getData(fromData data: [[String:Any]]) -> [HistoricalEvent] {
         var events: [HistoricalEvent] = []
         
@@ -77,7 +97,7 @@ class EventsUnarchiver {
 
 class GameManager: Game {
     
-    /// Properties
+    // MARK: - Game Properties
     var score: Int = 0
     var numberOfRoundsPlayed: Int = 0
     var roundsToBePlayed: Int
@@ -85,6 +105,16 @@ class GameManager: Game {
     var events: [HistoricalEvent]
     var roundEvents = [HistoricalEvent]()
     
+    /**
+     Initializes a new Game
+     
+     - Parameters:
+     - roundsToBePlayed:
+     - events:
+     - timePerQuestion:
+     
+     - Returns: Void
+     */
     required init(roundsToBePlayed: Int, events: [HistoricalEvent], timePerQuestion: Int) {
         self.roundsToBePlayed = roundsToBePlayed
         self.events = events
@@ -92,7 +122,13 @@ class GameManager: Game {
         self.roundEvents = getEventsForRound()
     }
     
-    func getEventsForRound() -> [HistoricalEvent] {
+    
+    /**
+     Gets 4 Random Historical events
+     
+     - Returns: [HistoricalEvent]
+     */
+    internal func getEventsForRound() -> [HistoricalEvent] {
         var roundEvents = [HistoricalEvent]()
         self.events.shuffle()
         
@@ -103,7 +139,15 @@ class GameManager: Game {
         return roundEvents
     }
     
-    func playerPutEventsInCorrectOrder(_ events: [HistoricalEvent]) -> Bool {
+    /**
+     Checks if player order of events is chronological
+     
+     - Parameters:
+     - events: Array of HistoricalEvent
+     
+     - Returns: Bool
+     */
+    public func playerPutEventsInCorrectOrder(_ events: [HistoricalEvent]) -> Bool {
         var orderIsCorrect = true
         var correctOrder = roundEvents
         
@@ -125,22 +169,29 @@ class GameManager: Game {
         numberOfRoundsPlayed += 1
         
         return orderIsCorrect
-        
     }
     
-    func setPlayerEventOrder(_ firstIndex: Int, _ secondIndex: Int) {
+    
+    /**
+     Rearanges array
+     
+     - Parameters:
+     - firstIndex: Int
+     - secondIndex: Int
+     
+     - Returns: Void
+     */
+    public func setPlayerEventOrder(_ firstIndex: Int, _ secondIndex: Int) {
         roundEvents.swapAt(firstIndex, secondIndex)
     }
     
-    func nextRound() {
+    /**
+     Gets new set of random events
+
+     - Returns: Void
+     */
+    public func nextRound() {
         roundEvents = getEventsForRound()
     }
-    
-    func playAgain() {
-        score = 0
-        numberOfRoundsPlayed = 0
-    }
-    
-    
-    
+
 }
