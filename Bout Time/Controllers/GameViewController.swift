@@ -15,6 +15,7 @@ class GameViewController: UIViewController {
     var gameManager: Game
     var timer: Timer?
     var eventLink: URL?
+    var isPaused = false
     let timePerQuestion = 60
     let roundsToBePlayed = 6
     
@@ -179,12 +180,13 @@ class GameViewController: UIViewController {
      - Returns: Void
      */
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
+        if motion == .motionShake && !isPaused {
             isPlayerCorrect()
+            timer?.invalidate()
+            toggleArrowButtons()
+            toggleLinkButtons()
+            isPaused = !isPaused
         }
-        timer?.invalidate()
-        toggleArrowButtons()
-        toggleLinkButtons()
     }
     
     // MARK: - Actions
@@ -229,9 +231,8 @@ class GameViewController: UIViewController {
      - Returns: Void
      */
     @IBAction func nextRound() {
-        
+        isPaused = !isPaused
         infoLabel.text = "Shake to complete"
-        
         toggleLinkButtons()
         toggleArrowButtons()
         
